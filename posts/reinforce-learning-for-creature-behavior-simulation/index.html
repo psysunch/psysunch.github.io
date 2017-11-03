@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="theme-resume " lang="zh-Hans">
+<head>
+<title>基于强化学习的生物行为模拟 | 孙春晖的简介</title>
+<!-- META -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="theme-color" content="#222" />
+
+<!-- LINK -->
+
+<!-- STYLE -->
+<link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+<link href="/css/basic.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- SCRIPT -->
+
+<!-- END -->
+
+</head>
+
+<body>
+  <div class="window">
+    <div class="window-content">
+      <div class="main-wrap">
+        <header class="header" id="header">
+          <div class="site-title-wrap"><a href="/" class="site-title">孙春晖的简介</a></div>
+        </header>
+        <main class="mainbox" id="mainbox">
+
+          <div class="post-wrap" id="post-wrap">
+            <article class="post-body">
+              <div class="post-meta">
+                <div class="post-title-wrap"><span class="post-title">基于强化学习的生物行为模拟</span></div>
+              </div>
+              <div class="post-content" id="post-content"><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>建立尽可能符合真实生物逻辑的虚拟生物体，使之在虚拟环境中生存，通过强化学习算法来管理其行为。</p>
+<p>通过考察虚拟生物行为的演变，结合行为发展的理论（目标的形成、计划的制定、<span style="color:#f00">言语的发生</span>），考虑如何优化强化学习算法。</p>
+<p>优化方向包括：</p>
+<ul>
+<li>根据情境制定目标</li>
+<li>根据情境调节线索权重</li>
+<li>构建“心理环境”或“意识环境”</li>
+<li>线索或刺激的“对象化”</li>
+<li>基于“对象化”的“属性化”和“类化”</li>
+<li>基于“对象化”、“属性化”、“类化”等的“概念化”</li>
+<li>基于“概念化”的“符号化”</li>
+<li>基于“符号化”的<span style="color:#f00">言语交流</span></li>
+</ul>
+<p>虚拟环境、虚拟生物、强化学习算法实现方案举例：使用 <a href="http://www.phaser.io" target="_blank" rel="external">phaser.js</a> 这个小游戏引擎构建具有各种刺激的二维虚拟环境，以及各种构造的二维生命体，通过强化学习js库 <a href="http://cs.stanford.edu/people/karpathy/reinforcejs/" target="_blank" rel="external">REINFORCE.js</a> 建立生命体行动强化的Agent，通过强化学习来形成二维生命体的行为模式。</p>
+<a id="more"></a>
+<script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/js/phaser.min.js"></script>
+<script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/js/convnet.js"></script>
+<script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/js/rl.js"></script>
+<script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/build/creature_feets_better5.js"></script>
+
+<hr>
+
+<script type="text/javascript">
+
+// create an environment object
+var env = {};
+env.getNumStates = function() { return 14; }
+env.getMaxNumActions = function() { return 9; }
+
+// create the DQN agent
+// agent parameter spec to play with (this gets eval()'d on Agent reset)
+var spec = {}
+spec.update = 'qlearn'; // qlearn | sarsa
+spec.gamma = 0.5; // discount factor, [0, 1)
+spec.epsilon = 0.3; // initial epsilon for epsilon-greedy policy, [0, 1)
+spec.alpha = 0.01; // value function learning rate
+spec.experience_add_every = 1; // number of time steps before we add another experience to replay memory
+spec.experience_size = 5000; // size of experience replay memory
+spec.learning_steps_per_iteration = 2;
+spec.tderror_clamp = 1.0; // for robustness
+spec.num_hidden_units = 100 // number of neurons in hidden layer
+
+
+agent = new RL.DQNAgent(env, spec); 
+
+// setInterval(function(){ // start the learning loop
+//   var action = agent.act(s); // s is an array of length 8
+//   //... execute action in environment and get the reward
+//   agent.learn(reward); // the agent improves its Q,policy,model, etc. reward is a float
+// }, 0);
+
+</script>
+
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2>
+<div id="worldbox">
+<style type="text/css">div#worldbox{width:100%;height:auto;text-align:center}div#worldbox canvas{margin:5px auto;}</style>
+</div>
+
+<p>若打开本窗口时生物形态不对称，请刷新此页面重试。</p>
+<p>此生物由嗅觉器官（黄）、移动器官（绿）和躯干（红）组成。每时每刻，此生物能够感知身体各个部分与躯干之间的角度和距离，以及嗅觉器官与白球之间的角度和距离。每当嗅觉器官触碰到白球，此生物的行为就被强化。</p>
+<p>随着时间的推移，此生物将逐渐学会“甩头”、“撞击”等动作。</p>
+<hr>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p><button onclick="setEpsilon();"> set epsilon </button></p>
+<p>点击此按钮，将下方文本框中数值设置为生物行为的随机性。数值越大，随机性越高；数值越小，越严格按照习得的模式来行为。</p>
+<p><textarea id="EpsilonBox">0.3</textarea></p>
+<hr>
+<h2 id="网络节点Json数据读写"><a href="#网络节点Json数据读写" class="headerlink" title="网络节点Json数据读写"></a>网络节点Json数据读写</h2>
+<p><button onclick="makeJson();"> make Json </button><button onclick="loadJson();"> load Json </button></p>
+<p>每隔30秒，生物的网络节点数据会自动写入下方的文本框。点击“make Json”，生物当前的网络节点数据会立即写入下方的文本框。点击“load Json”，则生物会立即读取文本框中的节点数据。</p>
+<p><textarea id="JsonBox"></textarea></p>
+
+
+<script type="text/javascript">
+function setEpsilon(){
+    epsilon = $('#EpsilonBox').val();
+    if (epsilon >= 1) {
+        epsilon = 0.99;
+    }
+    else if (epsilon <= 0) {
+        epsilon = 0.01;
+    }
+    agent.epsilon = epsilon;
+    $('#EpsilonBox').val(epsilon);
+}
+
+function makeJson(){
+    var json = agent.toJSON();
+    var str = JSON.stringify(json);
+    $('#JsonBox').val(str);
+    console.log('Json Made.');
+}
+
+function loadJson(){
+    var json = JSON.parse($('#JsonBox').val());
+    agent.fromJSON(json);
+    console.log('Json Loaded.');
+}
+
+//loadJson();
+setInterval(makeJson, 30000);
+</script>
+
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="external">ConvNetJS: 机器学习js库</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/reinforcejs/" target="_blank" rel="external">REINFORCEjs: 强化学习js库</a></li>
+<li><a href="http://www.phaser.io" target="_blank" rel="external">phaser: h5小游戏引擎</a></li>
+</ul>
+</div>
+            </article>
+          </div>
+
+        </main>
+        <aside class="sidebar" id="sidebar">
+
+          <div class="catpostlist-wrap">
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">当前研究</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Masters-Thesis/">毕业论文：基于唯识学的心理学核心理论探析</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Five-Level-Hierarchy-of-Subject-with-Mind/">基于佛家五蕴学说的心智主体五层次模型</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究构思</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">研究构思：基于句法关键词的自然语言义项切分</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">研究构思：基于感知元的人机通用词典</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
+              </nav>
+            </div>
+
+
+          </div>
+
+        </aside>
+        <footer class="footer" id="footer"></footer>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

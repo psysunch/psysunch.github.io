@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html class="theme-resume " lang="zh-Hans">
+<head>
+<title>研究构思：基于句法关键词的自然语言义项切分 | 孙春晖的简介</title>
+<!-- META -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="theme-color" content="#222" />
+
+<!-- LINK -->
+
+<!-- STYLE -->
+<link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+<link href="/css/basic.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- SCRIPT -->
+
+<!-- END -->
+
+</head>
+
+<body>
+  <div class="window">
+    <div class="window-content">
+      <div class="main-wrap">
+        <header class="header" id="header">
+          <div class="site-title-wrap"><a href="/" class="site-title">孙春晖的简介</a></div>
+        </header>
+        <main class="mainbox" id="mainbox">
+
+          <div class="post-wrap" id="post-wrap">
+            <article class="post-body">
+              <div class="post-meta">
+                <div class="post-title-wrap"><span class="post-title">研究构思：基于句法关键词的自然语言义项切分</span></div>
+              </div>
+              <div class="post-content" id="post-content"><h2 id="构思"><a href="#构思" class="headerlink" title="构思"></a>构思</h2><p>传统中文分词方法是脱离意义的字符串操作；传统的语义分析则是建立在已分词的词串之上。本研究试图提出一种以具有具体意义的句法结构为核心，通过识别句法结构关键词和关键位，对中文句子同时进行分词和语义分析（或依赖关系分析、整句句法结构分析等）的方法。</p>
+<h2 id="主要概念"><a href="#主要概念" class="headerlink" title="主要概念"></a>主要概念</h2><p>判断句法结构的卷积神经网络，<code>SS-CNN</code>：输入<code>字符串或词串</code>，输出最有可能的<code>句法结构对象.id</code>（标签）</p>
+<p>句法结构对象：{id；描述；元素；结构式；等}</p>
+<h2 id="算法概要"><a href="#算法概要" class="headerlink" title="算法概要"></a>算法概要</h2><p><code>f()</code>:</p>
+<ol>
+<li>根据字符串，通过<code>SS-CNN</code>，计算句子最高概率遵循的几种句法结构。</li>
+<li>对于每一个句法结构<code>ss</code>：<ol>
+<li>调用<code>ss</code>的运算函数，对字符串进行定义和切分。</li>
+<li>对于<code>ss</code>被切分后的每个成分，执行<code>f()</code>，递归直到每个成分最高概率的句法结构都是单词或单字。</li>
+</ol>
+</li>
+</ol>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>仅仅以一层句法结构为标准的基础切分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &apos;计算机句法结构分析需要什么样的词类知识-詹卫东.pdf&apos;</div><div class="line">&gt;&gt;&gt; sslist = SS_CNN(s)</div><div class="line">sslist:</div><div class="line">    1. 98.98682% , &apos;&lt;%文件名&gt;\.&lt;%后缀名&gt;&apos; , [&apos;文件名&apos;, &apos;后缀名&apos;] , id=2452</div><div class="line">    2. 87.34237% , &apos;&lt;%对象描述&gt;-&lt;%对象名&gt;&apos; , [&apos;对象描述&apos;, &apos;对象名&apos;] , id=535</div><div class="line"></div><div class="line">&gt;&gt;&gt; ss1 = getss(sslist(1).id)</div><div class="line">&gt;&gt;&gt; obj1 = segment(s,ss1)</div><div class="line">obj1:</div><div class="line">    structure: &apos;&lt;%文件名&gt;\.&lt;%后缀名&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;文件名&apos; : &apos;计算机句法结构分析需要什么样的词类知识-詹卫东&apos;</div><div class="line">        &apos;后缀名&apos; : &apos;pdf&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机句法结构分析需要什么样的词类知识-詹卫东/ ./ pdf/&apos;</div></pre></td></tr></table></figure>
+<p>切分至单词或单字结构时达到切分终点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; SS_CNN(obj1.items(&apos;后缀名&apos;))</div><div class="line">answer:</div><div class="line">    1. 99.88432% , &apos;&lt;%文件后缀名&gt;&apos; , [&apos;文件后缀名&apos;] , id=12343</div><div class="line">    2. 76.43563% , &apos;&lt;%无意义字母字符串&gt;&apos; , [&apos;无意义字母字符串&apos;] , id=47</div></pre></td></tr></table></figure>
+<p>切分至单词或单字结构时达到切分终点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; tmplist = SS_CNN(&apos;计算机句法结构分析需要什么样的词类知识&apos;)</div><div class="line">tmplist:</div><div class="line">    1. 92.54233% , &apos;&lt;%任务&gt;需要什么样的&lt;%要素&gt;&apos; , [&apos;任务&apos;,&apos;要素&apos;] , id=675873</div><div class="line">    2. 73.32361% , &apos;&lt;%执行者&gt;&lt;%执行函数&gt;&lt;%执行对象&gt;&apos; , [&apos;执行者&apos;,&apos;执行函数&apos;,&apos;执行对象&apos;] , id=2341</div></pre></td></tr></table></figure>
+<p>非最佳句法结构的第二层常规切分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; segment(&apos;计算机句法结构分析需要什么样的词类知识&apos;,tmplist(2))</div><div class="line">answer:</div><div class="line">    structure: &apos;&lt;%执行者&gt;&lt;%执行函数&gt;&lt;%执行对象&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;执行者&apos; : &apos;计算机句法结构&apos;</div><div class="line">        &apos;执行函数&apos; : &apos;分析&apos;</div><div class="line">        &apos;执行对象&apos; : &apos;需要什么样的词类知识&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机句法结构/ 分析/ 需要什么样的词类知识/&apos;</div></pre></td></tr></table></figure>
+<p>最佳句法结构下的第二层常规切分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; segment(&apos;计算机句法结构分析需要什么样的词类知识&apos;,tmplist(1))</div><div class="line">answer:</div><div class="line">    structure: &apos;&lt;%任务&gt;需要什么样的&lt;%要素&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;任务&apos; : &apos;计算机句法结构分析&apos;</div><div class="line">        &apos;要素&apos; : &apos;词类知识&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机句法结构分析/ 需要什么样的/ 词类知识/&apos;</div></pre></td></tr></table></figure>
+<p>自动切分或默认切分只切分到最高层的短语结构或单词结构或单字结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; segment(&apos;计算机句法结构分析&apos;,&apos;auto&apos;)</div><div class="line">answer:</div><div class="line">    structure: &apos;&lt;%术语&lt;%方法域&gt;&lt;%加工对象&gt;&lt;%加工方法&gt;&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;术语&apos;    : &apos;计算机句法结构分析&apos;</div><div class="line">        &apos;方法域&apos;  : &apos;计算机&apos;</div><div class="line">        &apos;加工对象&apos; : &apos;句法结构&apos;</div><div class="line">        &apos;加工方法&apos; : &apos;分析&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机句法结构分析/&apos;</div></pre></td></tr></table></figure>
+<p>对短语内部也进行切分，直到单词或单字结构级别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; segment(&apos;计算机句法结构分析&apos;,&apos;in-word&apos;)</div><div class="line">answer:</div><div class="line">    structure: &apos;&lt;%术语&lt;%方法域&gt;&lt;%加工对象&gt;&lt;%加工方法&gt;&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;术语&apos;    : &apos;计算机句法结构分析&apos;</div><div class="line">        &apos;方法域&apos;  : &apos;计算机&apos;</div><div class="line">        &apos;加工对象&apos; : &apos;句法结构&apos;</div><div class="line">        &apos;加工方法&apos; : &apos;分析&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机/ 句法结构/ 分析/&apos;</div></pre></td></tr></table></figure>
+<p>直接将所有元素切分至单词或单字结构级别的彻底分词：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; segment(&apos;计算机句法结构分析&apos;,&apos;total&apos;)</div><div class="line">answer:</div><div class="line">    structure: &apos;&lt;%术语&lt;%方法域&gt;&lt;%加工对象&gt;&lt;%加工方法&gt;&gt;&apos;</div><div class="line">    items:</div><div class="line">        &apos;术语&apos;    : &apos;计算机句法结构分析&apos;</div><div class="line">        &apos;方法域&apos;  : &apos;计算机&apos;</div><div class="line">        &apos;加工对象&apos; : &apos;句法结构&apos;</div><div class="line">            structure: &apos;&lt;%义相短语&lt;%义项&gt;&lt;%相项&gt;&gt;&apos;</div><div class="line">            items:</div><div class="line">                &apos;义项&apos; : &apos;句法&apos;</div><div class="line">                &apos;相项&apos; : &apos;结构&apos;</div><div class="line">            segmented:</div><div class="line">                &apos;句法/ 结构/&apos;</div><div class="line">        &apos;加工方法&apos; : &apos;分析&apos;</div><div class="line">    segmented:</div><div class="line">        &apos;计算机/ 句法/ 结构/ 分析/&apos;</div></pre></td></tr></table></figure>
+</div>
+            </article>
+          </div>
+
+        </main>
+        <aside class="sidebar" id="sidebar">
+
+          <div class="catpostlist-wrap">
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">当前研究</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Masters-Thesis/">毕业论文：基于唯识学的心理学核心理论探析</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Five-Level-Hierarchy-of-Subject-with-Mind/">基于佛家五蕴学说的心智主体五层次模型</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究构思</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">研究构思：基于句法关键词的自然语言义项切分</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">研究构思：基于感知元的人机通用词典</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
+              </nav>
+            </div>
+
+
+          </div>
+
+        </aside>
+        <footer class="footer" id="footer"></footer>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
