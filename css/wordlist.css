@@ -1,0 +1,21 @@
+.control-box{text-align:center;}
+#post-content .list_title-wrap{width:100%;padding:0.5em 0;margin:0.5em 0;}
+#post-content .list_title{font-size:2em;font-weight:bold;}
+#post-content .word-card-wrap{display:inline-block;width:48.6%;vertical-align:middle;}
+#post-content .word-card{display:inline-block;width:100%;border:1px solid #eee;background:#fafafa;border-radius:4px;margin:1em 0;height:16em;overflow:scroll;}
+#post-content .word_title-wrap,.word_meta{width:100%;text-align:center;}
+#post-content .word_title{margin:0.5em 0 0;font-size:1.6em;font-weight:bold;}
+#post-content .word_ipa{margin:0 0 0.5em;font-size:1em;opacity:0.6;}
+#post-content .word_detail{background:#fff;height:8em;overflow:scroll;}
+#post-content .word_source,.word_listtitle,.word_listid,.word_sublistid{display:none;}
+#post-content .word_sublisttitle{font-size:0.6em;opacity:0.4;}
+#post-content .word-card .hide{opacity:0}
+#post-content .word-card .word_ipa.hide{font-size:0.01rem;height:1px;}
+#post-content .word-card .word_detail .hide{font-size:0.01rem;height:1px;}
+@media screen and (max-width: 720px){
+  #post-content .word-card-wrap{width:100%;}
+}
+@media screen and (min-width: 1200px){
+  #post-content .word-card-wrap{width:32%;}
+  .mainbox{max-width:1080px;}
+}

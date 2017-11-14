@@ -17,6 +17,7 @@
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
 
 <!-- SCRIPT -->
+<script type="text/javascript" src="/js/jQuery.js"></script>
 
 <!-- END -->
 
@@ -37,7 +38,18 @@
         <aside class="sidebar" id="sidebar">
 
         </aside>
-        <footer class="footer" id="footer"></footer>
+        <footer class="footer" id="footer">
+
+<script>
+  $("a").click(function(){
+    var _this = $(this);
+    $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
+    return false;
+  })
+</script>
+
+
+        </footer>
       </div>
     </div>
   </div>
