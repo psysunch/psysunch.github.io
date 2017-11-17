@@ -124,6 +124,33 @@ body {
 .post-wrap .post-body .post-meta .post-title-wrap .post-title {
   font-size: 1.6em;
 }
+.post-wrap .post-body .post-meta .post-meta-detial-wrap {
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+.post-wrap .post-body .post-meta .post-meta-detial-wrap > span {
+  display: inline-block;
+  margin: 0 0.5em 0 0;
+}
+.post-wrap .post-body .post-meta .post-meta-detial-wrap > span:first-child {
+  margin: 0 0.5em;
+}
+.post-wrap .post-body .post-meta-footer-wrap {
+  border-top: 1px dotted #ddd;
+  margin: 2em 0 0;
+}
+.post-wrap .post-body .post-meta-footer-wrap .post-tag-list {
+  padding: 0;
+}
+.post-wrap .post-body .post-meta-footer-wrap .post-tag-list .post-tag-list-item {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+.post-wrap .post-body .post-meta-footer-wrap .post-tag-list > *:first-child {
+  margin: 0 0.5em 0 0;
+}
 .catpostlist-wrap {
   background-color: #fff;
   box-shadow: 0 1px 6px 0 rgba(170,170,170,0.2);
@@ -194,7 +221,7 @@ body {
   color: #092;
 }
 #post-content * {
-  line-height: 1.8;
+  line-height: 1.6;
 }
 #post-content h1,
 #post-content h2,
@@ -220,7 +247,7 @@ body {
   color: #08f;
 }
 #post-content p {
-  margin: 1em auto;
+  margin: 0.6em auto;
   vertical-align: middle;
 }
 #post-content ul,

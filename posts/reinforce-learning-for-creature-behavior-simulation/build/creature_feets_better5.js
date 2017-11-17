@@ -23,10 +23,12 @@ var s = [0,0,0,0,0,0,0,0];
 var lastDistance = gameH;
 var cartDistance = gameH;
 
+var containerBoxId = 'worldbox';
+var widthBase = 'post-content';
 
+var myMaxWidth=400;
 
-
-var game = new Phaser.Game(gameW, gameH, Phaser.CANVAS, 'worldbox', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(gameW, gameH, Phaser.CANVAS, containerBoxId, { preload: preload, create: create, update: update, render: render });
 
 
 //-----------------------------------------------------------
@@ -218,11 +220,23 @@ function create() {
     game.world.setBounds(0, 0, 800, 600);
     game.stage.disableVisibilityChange=true;
 
-
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
     game.scale.pagealignhorizontally = true;
     game.scale.pagealignvertically = true;
-    game.scale.setUserScale(0.5, 0.5);
+
+    var winWidth=document.getElementById(widthBase).offsetWidth;
+
+    var myScale;
+
+    if (myMaxWidth <= winWidth){
+        myScale=myMaxWidth/gameW;
+    }else{
+        myScale=winWidth/gameW;
+    }
+    console.log(myMaxWidth);
+    console.log(winWidth);
+    console.log(myScale);
+    game.scale.setUserScale(myScale, myScale);
 
 
     //  Enable p2 physics
@@ -458,5 +472,14 @@ function render() {
     //game.debug.text(shouldReword, 32, 128);
     game.debug.text(time, 32, 64);
 
+
+    winWidth=document.getElementById(widthBase).offsetWidth;
+
+    if (myMaxWidth <= winWidth){
+        myScale=myMaxWidth/gameW;
+    }else{
+        myScale=winWidth/gameW;
+    }
+    game.scale.setUserScale(myScale, myScale);
 }
 

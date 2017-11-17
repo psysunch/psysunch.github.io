@@ -36,6 +36,7 @@
             <article class="post-body">
               <div class="post-meta">
                 <div class="post-title-wrap"><span class="post-title">基于强化学习的生物行为模拟</span></div>
+                <div class="post-meta-detial-wrap"><span class="post-date">2017-10-24</span><span class="post-time">13:21:11</span></div>
               </div>
               <div class="post-content" id="post-content"><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>建立尽可能符合真实生物逻辑的虚拟生物体，使之在虚拟环境中生存，通过强化学习算法来管理其行为。</p>
 <p>通过考察虚拟生物行为的演变，结合行为发展的理论（目标的形成、计划的制定、<span style="color:#f00">言语的发生</span>），考虑如何优化强化学习算法。</p>
@@ -127,6 +128,8 @@ function makeJson(){
     var str = JSON.stringify(json);
     $('#JsonBox').val(str);
     console.log('Json Made.');
+    localStorage.agentNet=str;
+    console.log('agentNet stored to localStorage.');
 }
 
 function loadJson(){
@@ -135,7 +138,12 @@ function loadJson(){
     console.log('Json Loaded.');
 }
 
-//loadJson();
+if (typeof(localStorage.agentNet) == "undefined"){
+    makeJson();
+} else {
+    $('#JsonBox').val(localStorage.agentNet);
+    loadJson();
+}
 setInterval(makeJson, 30000);
 </script>
 
@@ -146,6 +154,7 @@ setInterval(makeJson, 30000);
 <li><a href="http://www.phaser.io" target="_blank" rel="external">phaser: h5小游戏引擎</a></li>
 </ul>
 </div>
+                <div class="post-meta-footer-wrap"></div>
             </article>
           </div>
 
@@ -157,8 +166,8 @@ setInterval(makeJson, 30000);
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
               </nav>
             </div>
 
@@ -188,8 +197,8 @@ setInterval(makeJson, 30000);
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究构思</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">研究构思：基于感知元的人机通用词典</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">研究构思：基于句法关键词的自然语言义项切分</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">研究构思：基于感知元的人机通用词典</a></span>
               </nav>
             </div>
 
