@@ -2,7 +2,7 @@
 
 <html class="theme-resume " lang="zh-Hans">
 <head>
-<title>毕业论文：基于唯识学的心理学核心理论探析 | 孙春晖的简介</title>
+<title>将oop思想引入语法研究 | 孙春晖的简介</title>
 <!-- META -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -35,14 +35,34 @@
           <div class="post-wrap" id="post-wrap">
             <article class="post-body">
               <div class="post-meta">
-                <div class="post-title-wrap"><span class="post-title">毕业论文：基于唯识学的心理学核心理论探析</span></div>
-                <div class="post-meta-detial-wrap"><span class="post-date">2017-10-28</span><span class="post-time">16:19:40</span></div>
+                <div class="post-title-wrap"><span class="post-title">将oop思想引入语法研究</span></div>
+                <div class="post-meta-detial-wrap"><span class="post-date">2017-11-08</span><span class="post-time">22:06:21</span></div>
               </div>
-              <div class="post-content" id="post-content">
-<p>请查看我的开题报告（<a href="sch-thesis-proposal.pdf" target="_blank">sch-thesis-proposal.pdf</a>）以了解详情。</p>
-
+              <div class="post-content" id="post-content"><p>面向对象编程（OOP）主要思想：</p>
+<p>类，子类，实例</p>
+<p>参数</p>
+<p>方法</p>
+<p>属性</p>
+<p>OOP蕴含着值得借鉴的语义知识框架思想</p>
+<p><strong>S1</strong>：“咱们去<u>吃食堂</u>吧。”</p>
+<p><code>&quot;吃食堂&quot; == 意义to表述(&quot;食堂&quot;.&quot;吃&quot;())</code></p>
+<p>“食堂”这个类具有一个方法，叫做“吃”，其表述方式为“方法词+类词”。</p>
+<p><strong>S2</strong>：“可以啊，我想<u>吃砂锅</u>。”</p>
+<p><code>&quot;吃砂锅&quot; == 意义to表述(&quot;食物&quot;_&quot;砂锅&quot;.&quot;吃&quot;())</code></p>
+<p>“砂锅”是“食物”的子类，“食物”这个类同样具有一个方法，叫做“吃”，其表述方式同样为“方法词+类词”，而“砂锅”作为子咧，继承了父类的方法。</p>
+<p><strong>S3</strong>：“怎么你这碗看起来比我的好吃啊，我想<u>吃你这碗（砂锅）</u>。”</p>
+<p><code>&quot;吃你这碗&quot; == 意义to表述(&quot;食物&quot;_&quot;砂锅&quot;(&quot;你这碗&quot;).&quot;吃&quot;())</code></p>
+<p>“你这碗”是“砂锅”的实例，同样继承了“砂锅”继承自“食物”的方法“吃”，而此时的表述方式其实变成了“方法词+实例词”。</p>
+<p>在例子S3中，类词和实例词在调用同一个方法时，表述方式具有相似性，要注意的是该现象理论上并不具备普遍性，虽然实际运用中通常都是如此。</p>
+<p>不过，属性词很多情况下都仅在实例层面可用。如“他是一个乐观的人。”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;他是一个乐观的人。&quot; == 意义to表述(属性陈述(&quot;人&quot;(&quot;他&quot;), &quot;乐观&quot;))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">意义to表述(属性陈述(类(单数实例), 属性)) = 实例词+&quot;是&quot;+&quot;一&quot;+类.量词+&quot;的&quot;+类词</div></pre></td></tr></table></figure>
+<hr>
+<p><code>表述to意义()</code>即为语义解析的实际过程函数。意义无法在不表述的情况下进行传播，所以需要通过内部完全无歧义的“标准表述语言”进行表述。语义解析函数是一种非常简单的字符串处理工具，实际上即通过正则表达式对字符串进行分割和标注。语义解析的关键不是建立完备的解析函数，而是调用正确的解析式，解析式选择函数才是算法的关键。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 以伪python代码表示的 上述算法的过程</span></div><div class="line"><span class="function"><span class="keyword">def</span> 表述<span class="title">to</span>意义<span class="params">(表述字符串)</span></span></div><div class="line">    可用解析式集 = 解析式选择函数(表述字符串)</div><div class="line">    选用的解析式 = 可用解析式集[<span class="number">0</span>]</div><div class="line">    标准意义表述 = 语义解析函数(表述, 选用的解析式)</div><div class="line">    <span class="keyword">return</span> 标准意义表述</div></pre></td></tr></table></figure>
+<p>至于解析式选择函数内部的具体过程，很大程度上可尝试通过神经网络来实现。</p>
 </div>
-                <div class="post-meta-footer-wrap"><ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/毕业论文/">毕业论文</a></li></ul></div>
+                <div class="post-meta-footer-wrap"></div>
             </article>
           </div>
 
