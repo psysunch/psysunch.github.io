@@ -77,6 +77,16 @@
                 <div class="post-meta-footer-wrap"></div>
             </article>
           </div>
+          <div class="comments-wrap tabs" id="commenttabs">
+            <ul class="nav-tabs">
+              <li class="tab"><a href="#welcomcomments_wrap">欢迎评论！</a></li>
+              <li class="tab active"><a href="#valinecomments_wrap">Valine评论</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" id="welcomcomments_wrap"><div id="welcomcomments"><p>欢迎进行评论😆。</p></div></div>
+              <div class="tab-pane active" id="valinecomments_wrap"><div id="valinecomments"></div></div>
+            </div>
+          </div>
 
         </main>
         <aside class="sidebar" id="sidebar">
@@ -84,18 +94,18 @@
           <div class="catpostlist-wrap">
 
             <div class="catpostlist-body">
-              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/personal-statement/">个人陈述</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
               </nav>
             </div>
 
             <div class="catpostlist-body">
-              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/personal-statement/">个人陈述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
               </nav>
             </div>
 
@@ -133,12 +143,70 @@
         <footer class="footer" id="footer">
 
 <script>
-  $("a").click(function(){
-    var _this = $(this);
-    $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
-    return false;
-  })
+  // $("a").click(function(){
+  //   var _this = $(this);
+  //   $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
+  //   return false;
+  // })
 </script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript">
+  new Valine({
+      av: AV,
+      el: '#valinecomments' ,
+      verify: true,
+      notify: false,
+      app_id: 'aH3IFImUnlbfBDzBRfsGd81T-gzGzoHsz',
+      app_key: '1Fo5G6RYUauY2FtJI3pdFHwa',
+      avatar: 'retro',
+      placeholder: '请留言'
+  });
+  $("#valinecomments div.vcontrol > div:first").text('支持 Markdown 语法');
+  $("#valinecomments > div.info").remove();
+  $("#valinecomments > div.vempty").remove();
+</script>
+
+
+<script>
+  function registerTabsTag() {
+    var tNav = '.tabs ul.nav-tabs ';
+
+    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
+    $(function() {
+      $(window).bind('hashchange', function() {
+        var tHash = location.hash;
+        if (tHash !== '') {
+          $(tNav + 'li:has(a[href="' + tHash + '"])').addClass('active').siblings().removeClass('active');
+          $(tHash).addClass('active').siblings().removeClass('active');
+        }
+      }).trigger('hashchange');
+    });
+
+    $(tNav + '.tab').on('click', function (href) {
+      href.preventDefault();
+      // Prevent selected tab to select again.
+      if(!$(this).hasClass('active')){
+
+        // Add & Remove active class on `nav-tabs` & `tab-content`.
+        $(this).addClass('active').siblings().removeClass('active');
+        var tActive = $(this).find('a').attr('href');
+        $(tActive).addClass('active').siblings().removeClass('active');
+
+        // Clear location hash in browser if #permalink exists.
+        if (location.hash !== '') {
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+      }
+    });
+
+  };
+
+  registerTabsTag();
+</script>
+
+
+
 
 
         </footer>

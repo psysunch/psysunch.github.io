@@ -41,12 +41,70 @@
         <footer class="footer" id="footer">
 
 <script>
-  $("a").click(function(){
-    var _this = $(this);
-    $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
-    return false;
-  })
+  // $("a").click(function(){
+  //   var _this = $(this);
+  //   $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
+  //   return false;
+  // })
 </script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript">
+  new Valine({
+      av: AV,
+      el: '#valinecomments' ,
+      verify: true,
+      notify: false,
+      app_id: 'aH3IFImUnlbfBDzBRfsGd81T-gzGzoHsz',
+      app_key: '1Fo5G6RYUauY2FtJI3pdFHwa',
+      avatar: 'retro',
+      placeholder: '请留言'
+  });
+  $("#valinecomments div.vcontrol > div:first").text('支持 Markdown 语法');
+  $("#valinecomments > div.info").remove();
+  $("#valinecomments > div.vempty").remove();
+</script>
+
+
+<script>
+  function registerTabsTag() {
+    var tNav = '.tabs ul.nav-tabs ';
+
+    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
+    $(function() {
+      $(window).bind('hashchange', function() {
+        var tHash = location.hash;
+        if (tHash !== '') {
+          $(tNav + 'li:has(a[href="' + tHash + '"])').addClass('active').siblings().removeClass('active');
+          $(tHash).addClass('active').siblings().removeClass('active');
+        }
+      }).trigger('hashchange');
+    });
+
+    $(tNav + '.tab').on('click', function (href) {
+      href.preventDefault();
+      // Prevent selected tab to select again.
+      if(!$(this).hasClass('active')){
+
+        // Add & Remove active class on `nav-tabs` & `tab-content`.
+        $(this).addClass('active').siblings().removeClass('active');
+        var tActive = $(this).find('a').attr('href');
+        $(tActive).addClass('active').siblings().removeClass('active');
+
+        // Clear location hash in browser if #permalink exists.
+        if (location.hash !== '') {
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+      }
+    });
+
+  };
+
+  registerTabsTag();
+</script>
+
+
+
 
 
         </footer>
