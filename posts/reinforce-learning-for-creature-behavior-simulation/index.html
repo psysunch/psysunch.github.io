@@ -52,6 +52,7 @@
 <li>基于“符号化”的<span style="color:#f00">言语交流</span></li>
 </ul>
 <p>虚拟环境、虚拟生物、强化学习算法实现方案举例：使用 <a href="http://www.phaser.io" target="_blank" rel="external">phaser.js</a> 这个小游戏引擎构建具有各种刺激的二维虚拟环境，以及各种构造的二维生命体，通过强化学习js库 <a href="http://cs.stanford.edu/people/karpathy/reinforcejs/" target="_blank" rel="external">REINFORCE.js</a> 建立生命体行动强化的Agent，通过强化学习来形成二维生命体的行为模式。</p>
+<p>Demo加载需要时间，请稍等。程序不大，且不存在贴图，故消耗流量很少。</p>
 <a id="more"></a>
 <script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/js/phaser.min.js"></script>
 <script type="text/javascript" src="/posts/reinforce-learning-for-creature-behavior-simulation/js/convnet.js"></script>
@@ -98,6 +99,13 @@ agent = new RL.DQNAgent(env, spec);
 
 <p>若打开本窗口时生物形态不对称，请刷新此页面重试。</p>
 <p>此生物由嗅觉器官（黄）、移动器官（绿）和躯干（红）组成。每时每刻，此生物能够感知身体各个部分与躯干之间的角度和距离，以及嗅觉器官与白球之间的角度和距离。每当嗅觉器官触碰到白球，此生物的行为就被强化。</p>
+<p>详细得分规则：</p>
+<ul>
+<li>撞击目标，+200分</li>
+<li>撞击其他，-10分</li>
+<li>接近目标，+10分</li>
+<li>远离目标，-5分</li>
+</ul>
 <p>随着时间的推移，此生物将逐渐学会“甩头”、“撞击”等动作。</p>
 <hr>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p><button onclick="setEpsilon();"> set epsilon </button></p>
@@ -183,8 +191,8 @@ setInterval(makeJson, 30000);
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/personal-statement/">个人陈述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
               </nav>
             </div>
