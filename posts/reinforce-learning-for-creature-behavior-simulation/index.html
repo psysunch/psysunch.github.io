@@ -97,7 +97,7 @@ agent = new RL.DQNAgent(env, spec);
 <style type="text/css">div#worldbox{width:100%;height:auto;text-align:center;}div#worldbox canvas{margin:5px auto;}</style>
 </div>
 
-<p>若打开本窗口时生物形态不对称，请刷新此页面重试。</p>
+<p>若打开本窗口时生物形态不对称，请刷新此页面重试。部分浏览器可能需要尝试多次。</p>
 <p>此生物由嗅觉器官（黄）、移动器官（绿）和躯干（红）组成。每时每刻，此生物能够感知身体各个部分与躯干之间的角度和距离，以及嗅觉器官与白球之间的角度和距离。每当嗅觉器官触碰到白球，此生物的行为就被强化。</p>
 <p>详细得分规则：</p>
 <ul>
@@ -182,18 +182,17 @@ setInterval(makeJson, 30000);
           <div class="catpostlist-wrap">
 
             <div class="catpostlist-body">
-              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
               </nav>
             </div>
 
             <div class="catpostlist-body">
-              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/personal-statement/">个人陈述</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
               </nav>
             </div>
 
@@ -211,8 +210,15 @@ setInterval(makeJson, 30000);
               <nav class="catpostlist-content">
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/classification-of-the-problems-that-humans-are-solving/">人类解决着的问题的基本类型</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/oop-nlp/">将oop思想引入语法研究</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/generation-of-stream-of-consciousness/">想法记录：意识流生成</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/knowledge-stack-and-expression/">知识、知识栈、知识表述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/generation-of-stream-of-consciousness/">想法记录：意识流生成</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">留言板</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/memo/">留言板</a></span>
               </nav>
             </div>
 
@@ -229,6 +235,11 @@ setInterval(makeJson, 30000);
 
         </aside>
         <footer class="footer" id="footer">
+<div class="footer-info blur">
+  <p>Hosted by <a href="https://pages.coding.me/" style="font-weight: bold" target="_blank">Coding Pages</a></p>
+  <p>Theme <a href="#" style="font-weight: bold">Unnamed</a> by <a href="https://github.com/gitforziio" target="_blank">Roomcar</a></p>
+</div>
+
 
 <script>
   // $("a").click(function(){
@@ -250,9 +261,9 @@ setInterval(makeJson, 30000);
       avatar: 'retro',
       placeholder: '请留言'
   });
-  $("#valinecomments div.vcontrol > div:first").text('支持 Markdown 语法');
-  $("#valinecomments > div.info").remove();
-  $("#valinecomments > div.vempty").remove();
+  // $("#valinecomments div.vcontrol > div:first").text('支持 Markdown 语法');
+  // $("#valinecomments > div.info").remove();
+  // $("#valinecomments > div.vempty").remove();
 </script>
 
 
