@@ -39,7 +39,7 @@
                 <div class="post-meta-detial-wrap"><span class="post-date">2017-10-24</span><span class="post-time">13:21:11</span></div>
               </div>
               <div class="post-content" id="post-content"><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>建立尽可能符合真实生物逻辑的虚拟生物体，使之在虚拟环境中生存，通过强化学习算法来管理其行为。</p>
-<p>通过考察虚拟生物行为的演变，结合行为发展的理论（目标的形成、计划的制定、<span style="color:#f00">言语的发生</span>），考虑如何优化强化学习算法。</p>
+<p>通过考察虚拟生物行为的演变，结合行为发展的理论（目标的形成、计划的制定、<span style="color:#222">言语的发生</span>），考虑如何优化强化学习算法。</p>
 <p>优化方向包括：</p>
 <ul>
 <li>根据情境制定目标</li>
@@ -49,7 +49,7 @@
 <li>基于“对象化”的“属性化”和“类化”</li>
 <li>基于“对象化”、“属性化”、“类化”等的“概念化”</li>
 <li>基于“概念化”的“符号化”</li>
-<li>基于“符号化”的<span style="color:#f00">言语交流</span></li>
+<li>基于“符号化”的<span style="color:#222">言语交流</span></li>
 </ul>
 <p>虚拟环境、虚拟生物、强化学习算法实现方案举例：使用 <a href="http://www.phaser.io" target="_blank" rel="external">phaser.js</a> 这个小游戏引擎构建具有各种刺激的二维虚拟环境，以及各种构造的二维生命体，通过强化学习js库 <a href="http://cs.stanford.edu/people/karpathy/reinforcejs/" target="_blank" rel="external">REINFORCE.js</a> 建立生命体行动强化的Agent，通过强化学习来形成二维生命体的行为模式。</p>
 <p>Demo加载需要时间，请稍等。程序不大，且不存在贴图，故消耗流量很少。</p>
@@ -132,25 +132,25 @@ function setEpsilon(){
 }
 
 function makeJson(){
-    var json = agent.toJSON();
-    var str = JSON.stringify(json);
-    $('#JsonBox').val(str);
-    console.log('Json Made.');
-    localStorage.agentNet=str;
-    console.log('agentNet stored to localStorage.');
+​    var json = agent.toJSON();
+​    var str = JSON.stringify(json);
+​    $('#JsonBox').val(str);
+​    console.log('Json Made.');
+​    localStorage.agentNet=str;
+​    console.log('agentNet stored to localStorage.');
 }
 
 function loadJson(){
-    var json = JSON.parse($('#JsonBox').val());
-    agent.fromJSON(json);
-    console.log('Json Loaded.');
+​    var json = JSON.parse($('#JsonBox').val());
+​    agent.fromJSON(json);
+​    console.log('Json Loaded.');
 }
 
 if (typeof(localStorage.agentNet) == "undefined"){
-    makeJson();
+​    makeJson();
 } else {
-    $('#JsonBox').val(localStorage.agentNet);
-    loadJson();
+​    $('#JsonBox').val(localStorage.agentNet);
+​    loadJson();
 }
 setInterval(makeJson, 30000);
 </script>
@@ -185,7 +185,7 @@ setInterval(makeJson, 30000);
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
               <nav class="catpostlist-content">
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述（待更新）</a></span>
               </nav>
             </div>
 
@@ -200,8 +200,8 @@ setInterval(makeJson, 30000);
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究期望</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">基于感知元的人机通用词典</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">基于句法关键词的自然语言义项切分</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">基于感知元的人机通用词典</a></span>
               </nav>
             </div>
 
@@ -209,8 +209,8 @@ setInterval(makeJson, 30000);
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他研究</span></div></div>
               <nav class="catpostlist-content">
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/其他研究/阅读策略对两种阅读理解任务眼动特征的影响/">阅读策略对两种阅读理解任务眼动特征的影响</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/其他研究/文章标记的概念演变及重构（节选）/">文章标记的概念演变及重构（节选）</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/text-signals-or-post-tags/">文章标记的概念演变及重构（节选）</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reading-strategy-and-eye-movement/">阅读策略对两种阅读理解任务眼动特征的影响</a></span>
               </nav>
             </div>
 
@@ -218,14 +218,16 @@ setInterval(makeJson, 30000);
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">零星想法</span></div></div>
               <nav class="catpostlist-content">
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/classification-of-the-problems-that-humans-are-solving/">人类解决着的问题的基本类型</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/robot-emotion/">怎样让机器人有情感</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/oop-nlp/">将oop思想引入语法研究</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/在新的概念框架下对“知识”进行定义/">在新的概念框架下对“知识”进行定义</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/generation-of-stream-of-consciousness/">意识流生成</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/oop-nlp/">将oop思想引入语法研究</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/小议计算机语言与自然语言的可比性/">小议计算机语言与自然语言的可比性</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/让机器像人一样进行基于语义的学习/">让机器像人一样进行基于语义的学习</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/differences-in-the-paradigms-of-psychology-and-linguistics/">心理学和语言学的范式差异</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/robot-emotion/">怎样让机器人有情感</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/generation-of-stream-of-consciousness/">意识流生成</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/knowledge-stack-and-expression/">知识、知识栈、知识表述</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/让机器像人一样进行基于语义的学习/">让机器像人一样进行基于语义的学习</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/designing-a-language/">设计论的语言学</a></span>
               </nav>
             </div>
 
