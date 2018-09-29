@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="theme-resume " lang="zh-Hans">
+<head>
+<title>☆语义形式化 | 孙春晖的简介</title>
+<!-- META -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="theme-color" content="#222" />
+
+<!-- LINK -->
+
+<!-- STYLE -->
+<link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+<link href="/css/basic.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- SCRIPT -->
+<script type="text/javascript" src="/js/jQuery.js"></script>
+
+<!-- END -->
+
+</head>
+
+<body>
+  <div class="window">
+    <div class="window-content">
+      <div class="main-wrap">
+        <header class="header" id="header">
+          <div class="site-title-wrap"><a href="/" class="site-title">孙春晖的简介</a></div>
+        </header>
+        <main class="mainbox" id="mainbox">
+
+          <div class="post-wrap" id="post-wrap">
+            <article class="post-body">
+              <div class="post-meta">
+                <div class="post-title-wrap"><span class="post-title">☆语义形式化</span></div>
+                <div class="post-meta-detial-wrap"><span class="post-date">2018-09-28</span><span class="post-time">19:37:38</span></div>
+              </div>
+              <div class="post-content" id="post-content"><blockquote>
+<p>2，希望能建立一套语义形式化的体系。这是我长久以来都希望实现的。之前我的想法是在一些概念词典（HowNet、百度UNIT等）的基础上，增加称为“感知元”的层面，提供词典与一些诸如机器视觉模型的接口能力。但最近想法又有些演变，主要是进一步了解了您参与制作的汉语语义词典后，发觉对语义词类的分类与我硕士阶段研究的唯识学百法（主要是对心理现象经验的分类）有非常大的相通之处。所以考虑从整个语言心理加工的机制着手，通过一些基础心理模型来刻画语义的实际表述内容，并建立完整的语义形式化体系。</p>
+</blockquote>
+<h3 id="引入类似面向对象编程的类、实例、方法等概念"><a href="#引入类似面向对象编程的类、实例、方法等概念" class="headerlink" title="引入类似面向对象编程的类、实例、方法等概念"></a>引入类似面向对象编程的类、实例、方法等概念</h3><p>其实在<a href="http://ccl.pku.edu.cn/ccl_sem_dict/973_beida_sem_classification.txt" target="_blank" rel="external">北大语义词典的分类体系</a>中，已经能够看出类、实例、方法、属性等不同范畴的区分了，但是这些范畴的划分并没有组织成像面向对象编程那样的形式，而是根据汉语的词类来划分了。其实这可能是受到了语言学研究习惯的束缚。</p>
+<h3 id="语义与人类经验"><a href="#语义与人类经验" class="headerlink" title="语义与人类经验"></a>语义与人类经验</h3><p>我个人是这样理解语义与人类经验的关系的：语义所涉及的内容是人类经验的子集，并且非常接近人类经验这个全集。所以对语义进行形式化，和对人类经验的形式化是非常相近的问题，且即使存在区别，那么后一个问题也包含了前一个问题，并不会给前一个问题带来疏漏。所以完全可以直接将语义形式化的目标设置为对人类经验的形式化。</p>
+<h3 id="语义的模型化"><a href="#语义的模型化" class="headerlink" title="语义的模型化"></a>语义的模型化</h3><p>人理解世界是通过各式各样的模型来的。最典型的模型是时间、空间、数量的模型。在汉语中有专门的时间词、处所词、方位词、数次量词数量词等来描述这些模型的具体情形。此外，还有身份模型（教师医生会计；职责、服装、典型形象、工作场所等）、事件与对策模型（原因、征兆、表现、结果、处理办法等）、道德模型、思维模型、团体模型、物理模型、整体与部分模型，以及事物发展（产生、稳定、发展、消亡等）的模型等等等等。当然，实体模型也非常典型，但是事物模型太具体，以至于我们不太习惯将之看作是“模型”。</p>
+<p>上述模型在北大CCL现代汉语语义词典中都能看到例子。但是，前面也说到，在该词典中这些词语并不是以面向对象编程那样的形式来组织和存储的。</p>
+<p>我的想法是，专门建立一个库叫做“模型库”，用来存储上面提到的种种模型。然后将模型库中模型的各个成分与“词库”中的词语建立映射关系。这样的好处之一是在程序设计上允许了无法用言语形容的事物和没有实际语义的言语内容的存在。并且还能够根据模型库中模型的功能，来进行一定程度的推理。</p>
+<p>事实上，这样的想法在HowNet、<a href="http://ai.baidu.com/docs#/UNIT-v2-guide/top" target="_blank" rel="external">百度UNIT</a>等概念库之中已经有一定程度的体现了。但是这类库在构建的时候仍然存在一些问题，比如HowNet中并没有单独建立一个模型库，而是将各种模型要素直接地刻画在了概念（“义元”）之中。例如对“医院”这个词语进行刻画时，强制地将之与医生、病人、生病、治疗等概念联结到一起。虽然直观上符合我们对医院的认知，但是这种模型和词语之间的绑定不应该是直接强制的，因为我们是实际使用语言时并不总是使用词语最常见的意义。例如“我家住在医院旁边”这句话中，医院并不是使用“医疗.场所”模型，而仅仅是使用了“空间.位置”模型。百度UNIT的问题则是模型过于具体，很多只是限于特定情境的应用，并不是人类认识世界的最最基本的模型，所以不足以作为语义的形式化方案。</p>
+<h3 id="模型化的意义"><a href="#模型化的意义" class="headerlink" title="模型化的意义"></a>模型化的意义</h3><p>（1）上面提到模型化的好处之一是在程序设计上允许了无法用言语形容的事物和没有实际语义的言语内容的存在，这只是一个很小的好处。还提到能够根据模型库中模型的功能，来进行一定程度的推理——这是因为模型实际上就是一些真正能够进行一定运算的算法。比如对于集合模型，我们不仅要定义关于集合的各种属性，还要在尽可能算法里把集合的各种运算实现出来。这样，对于与集合模型绑定了的词语或表述形式，我们就能够真的实现一些言语上的推论。不过，有些实现起来有困难的模型我们也不需要担心，因为模型具体算法的缺失并不会影响模型在表示语义方面的作用，只不过是缺少了一定的推理功能而已，其语义表示的功能仍然存在（说到底，语义表示仍然是用符号表示符号）。</p>
+<p>除了刚才提到的，还有一些别的好处。</p>
+<p>（2）最近听郭锐老师的语义分析课，提到一些虚词释义的例子。比如倒（第四声，如：质量倒挺好，就是价格贵了些|该来的没来，不该来的倒来了|你倒是说呀），现有词典中有七个义项，其实前六个（具体记不清了）都是结合语境产生的综合义，郭老师说这六个义项都可以归纳到“反预期”的核心义，还有一个义项则是单独的表示催促的意思（其实可能也可以归纳到“反预期”之中）。类似的，“可以”的许多义项都能归纳到“没有障碍”的核心义；“也”的许多义项都能归纳到“相同”的核心义。</p>
+<p>那么问题来了，我们确实能够逐个词语地分析它们的核心义，但是这工作量或许是很大的（如果只是虚词可能还好），而且难以估量核心义的范围边界到底在哪里。有没有可能反过来，我们先考虑全部的核心义有哪些，然后再去分析词语和核心义的对应关系呢？</p>
+<p>这种做法就是先制作模型库，将核心义限定在模型库能表示的意义之中。比如上面几种虚词的核心义，就可以通过诸如“心理模型”、“可能性模型”、“对比关系模型”等进行表示。（这些模型的划定以及命名都需要再商定）</p>
+<p>（3）由于模型库是将语义与形式完全分离了，所以这种表示方式是相当纯粹的。对于不同语言之间的语义差异，可以通过模型的差异体现出来。</p>
+<p>（4）建立模型库还有一个非常大的好处，就是在理论上允许将各行各业的专业知识中的模型纳入进来。其实我们的实际语言活动也是这样，当我们讨论一些专业问题时，使用的语言可能会超越正常语法。我想这在数学、自然科学、工学、逻辑学、音乐等领域的体现非常明显。</p>
+<p>（5）模型库还有一个极其重要的好处，那就是为以后的通用人工智能预留了实际功能的接口。比如在模型库中存有空间方位模型，不过目前我们没有编写完整的处理空间方位的算法，但是我们的模型是存在的，需要做的只是更换具体算法而已。在未来，完全可以将这个模型与实际的空间定位程序接口连接起来。由于我们的模型库和语言元素（词汇，甚至句子结构等）是绑定在一起的，那么这个整体的知识库就有可能实现将自然语言转变为真正意义上的空间定位知识。</p>
+<p>（6）至于以往的词典或者库所能够实现的一些功能，例如合一运算，这个模型化的库自然也是能够做的。</p>
+<h3 id="模型和语法观"><a href="#模型和语法观" class="headerlink" title="模型和语法观"></a>模型和语法观</h3><p>说到这里我想提一下这种框架下的语法观，那就是语法和模型是绑定的，是有映射关系的。比如我们使用数词、量词、数量词，是和我们的数量模型绑定的；我们使用加减乘除符号等数学语言的时候，那种数学符号形式是与数学的专用模型绑定的；我们给电脑里的文件起文件名的时候，起名的“语法”是和我们对文件的理解绑定的。这种语法观和构式语法其实是高度兼容的，因为构式语法就是用不太有规律的特定的语法结构来表达特定的内容。所以，由构式形成的句子所表达内容，其实就对应着一些特定的模型。</p>
+<p>说到这里，模型应该怎么表示呢？我觉得这项工作要么是使用一种现成的编程语言来表示，沿用这个编程语言中的类、方法、属性、实例等的定义方式；要么就人工制定一种类似的新的形式语言，使它能够用来表示类、方法、属性、实例等范畴，但是这种方式倒还不如用现成编程语言来得可靠。</p>
+<h3 id="模型构建的依据"><a href="#模型构建的依据" class="headerlink" title="模型构建的依据"></a>模型构建的依据</h3><p>我们可以通过不同的路径来构建“模型库”。</p>
+<p>首先我们可以通过自身的直接经验来总结模型。不过这不是一种比较合适的方式。</p>
+<p>其次我们可以通过对语料库进行归纳和编码来得到模型。以往的许多研究也都是通过这种路径来实现的。</p>
+<p>再次我们还可以在一些现有的体系的基础上发展出模型。目前我个人最熟悉的关于人类经验对象的分类体系其实就是唯识学的<a href="http://yogacara.tridict.com/posts/5-micro-perspective/#53-知觉的元素色法与心不相应行法" target="_blank" rel="external">五位百法体系</a>，这是一种从人类心理功能出发的现象分类体系。我个人出于熟悉性，倾向于延续自己以往做过的研究，从这个体系出发，来刻画一些最基本的模型。当然这部分工作其实并不会延续太久，可能只是在起步时期起到主要作用，后续的主体工作仍然需要靠语料库来推动。</p>
+<p>我多次提到唯识学体系的另一个原因，是唯识学体系确实有着比较详细的关于人类心理活动的模型。在人类的心理层面，不论是西方心理学也好，还是自然的语料库也好，都比较难以找到比较系统的模型。而唯识学体系确实是对人类心理运作刻画得很详细的模型了。（参见：<a href="http://resume.tridict.com/posts/differences-between-yoracaga-and-general-semantics/">唯识学体系和一般语义体系的区别</a>）</p>
+<h3 id="可能面临的困难"><a href="#可能面临的困难" class="headerlink" title="可能面临的困难"></a>可能面临的困难</h3><p>需要说明的是，在模型库构建的早期，我们很大程度上不需要编写模型的具体算法，只需要将模型列举出来即可。接下来的工作和以往的词典编制工作也很类似，就是建立词库，然后把词的条目与模型的条目联结起来（在以往词典工作中则是建立许多字段来刻画这些词条）。</p>
+<p>上面的工作在设想中并没有非常重大的困难。可能的困难是接下来的。那就是对于模型，我们希望的不仅仅是将之与词语对应起来，而且还希望将之与句法结构对应起来。这项工作在直觉上是可行的，但是由于前期工作太少，目前较难预料彼时面临的具体情形。初步考虑应该需要构建一个和构式库类似的库，但其中的条目不仅是特殊语法的构式，还包括一般化的语法结构（参见：<a href="http://resume.tridict.com/posts/chinese-general-construction-bank/">现代汉语一般构式库</a>）。</p>
+<hr>
+<p>以上就是我关于语义形式化工作的考虑。不过现在看来，说是语义的“形式化”可能并不是非常恰当，因为上述工作已经不是简单地“形式化”了，而是“模型化”或者“算法化”了（但编程语言的代码也是一种形式）。</p>
+<p>关于上述想法的更早期的形态，参见：<a href="http://resume.tridict.com/posts/tri-dict/">基于感知元的人机通用词典</a>；<a href="http://resume.tridict.com/posts/oop-nlp/">将oop思想引入语法研究</a>；<a href="http://resume.tridict.com/posts/semantic-learning/">让机器像人一样进行基于语义的学习</a>；<a href="http://resume.tridict.com/posts/comparability-between-nl-and-cl/">小议计算机语言与自然语言的可比性</a>。</p>
+</div>
+                <div class="post-meta-footer-wrap"></div>
+            </article>
+          </div>
+          <div class="comments-wrap tabs" id="commenttabs">
+            <ul class="nav-tabs">
+              <li class="tab"><a href="#welcomcomments_wrap">欢迎评论！</a></li>
+              <li class="tab active"><a href="#valinecomments_wrap">Valine评论</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" id="welcomcomments_wrap"><div id="welcomcomments"><p>欢迎进行评论😆。</p></div></div>
+              <div class="tab-pane active" id="valinecomments_wrap"><div id="valinecomments"></div></div>
+            </div>
+          </div>
+
+        </main>
+        <aside class="sidebar" id="sidebar">
+
+          <div class="catpostlist-wrap">
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">基本信息</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/resume/">简历</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/self-introduction/">自述（待更新）</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">正式论文</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Masters-Thesis/">硕士论文：从唯识学到唯识心理学——中国本土心智系统学说</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Five-Level-Hierarchy-of-Subject-with-Mind/">基于佛家五蕴学说的心智主体五层次模型</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究期望</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/information-database/">文本信息提取（从文本到知识数据库操作）</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/chinese-general-construction-bank/">现代汉语一般构式库</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/semantics-formalization/">☆语义形式化</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他研究</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Bachelor-Thesis/">本科毕业论文：痣对大学生面孔知觉内隐态度的影响</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reading-strategy-and-eye-movement/">阅读策略对两种阅读理解任务眼动特征的影响</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">零星想法</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/classification-of-the-problems-that-humans-are-solving/">人类解决着的问题的基本类型</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/differences-between-yoracaga-and-general-semantics/">唯识学体系和一般语义体系的区别</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">基于感知元的人机通用词典</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">基于句法关键词的自然语言义项切分</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/oop-nlp/">将oop思想引入语法研究</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/comparability-between-nl-and-cl/">小议计算机语言与自然语言的可比性</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/differences-in-the-paradigms-of-psychology-and-linguistics/">心理学和语言学的范式差异</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/让机器像人一样进行基于语义的学习/">让机器像人一样进行基于语义的学习</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/designing-a-language/">设计论的语言学</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">杂谈</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/robot-emotion/">怎样让机器人有情感</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/to-define-knowledge/">在新的概念框架下对“知识”进行定义</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/knowledge-stack-and-expression/">知识、知识栈、知识表述</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">留言板</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/memo/">留言板</a></span>
+              </nav>
+            </div>
+
+          </div>
+
+        </aside>
+        <footer class="footer" id="footer">
+<div class="footer-info blur">
+  <p>Hosted by <a href="https://pages.coding.me/" style="font-weight: bold" target="_blank">Coding Pages</a></p>
+  <p>Theme <a href="#" style="font-weight: bold">Unnamed</a> by <a href="https://github.com/gitforziio" target="_blank">Roomcar</a></p>
+</div>
+
+
+<script>
+  // $("a").click(function(){
+  //   var _this = $(this);
+  //   $("body").css({"background-color":"#fff","opacity":"0"}).fadeOut(100,function(){window.location.href = _this.attr("href");})
+  //   return false;
+  // })
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript">
+  new Valine({
+      av: AV,
+      el: '#valinecomments' ,
+      verify: true,
+      notify: false,
+      app_id: 'aH3IFImUnlbfBDzBRfsGd81T-gzGzoHsz',
+      app_key: '1Fo5G6RYUauY2FtJI3pdFHwa',
+      avatar: 'retro',
+      placeholder: '请留言'
+  });
+  // $("#valinecomments div.vcontrol > div:first").text('支持 Markdown 语法');
+  // $("#valinecomments > div.info").remove();
+  // $("#valinecomments > div.vempty").remove();
+</script>
+
+
+<script>
+  function registerTabsTag() {
+    var tNav = '.tabs ul.nav-tabs ';
+
+    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
+    $(function() {
+      $(window).bind('hashchange', function() {
+        var tHash = location.hash;
+        if (tHash !== '') {
+          $(tNav + 'li:has(a[href="' + tHash + '"])').addClass('active').siblings().removeClass('active');
+          $(tHash).addClass('active').siblings().removeClass('active');
+        }
+      }).trigger('hashchange');
+    });
+
+    $(tNav + '.tab').on('click', function (href) {
+      href.preventDefault();
+      // Prevent selected tab to select again.
+      if(!$(this).hasClass('active')){
+
+        // Add & Remove active class on `nav-tabs` & `tab-content`.
+        $(this).addClass('active').siblings().removeClass('active');
+        var tActive = $(this).find('a').attr('href');
+        $(tActive).addClass('active').siblings().removeClass('active');
+
+        // Clear location hash in browser if #permalink exists.
+        if (location.hash !== '') {
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+      }
+    });
+
+  };
+
+  registerTabsTag();
+</script>
+
+
+
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

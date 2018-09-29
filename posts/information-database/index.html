@@ -38,8 +38,11 @@
                 <div class="post-title-wrap"><span class="post-title">文本信息提取（从文本到知识数据库操作）</span></div>
                 <div class="post-meta-detial-wrap"><span class="post-date">2018-09-24</span><span class="post-time">10:04:02</span></div>
               </div>
-              <div class="post-content" id="post-content"><h3 id="一、一个直观的例子"><a href="#一、一个直观的例子" class="headerlink" title="一、一个直观的例子"></a>一、一个直观的例子</h3><p>这里说的“知识数据库”并不限于正确的、符合经验的知识，也包括个体平时接触到的任何可能获取的信息。说是“知识数据库”，其实不如称“情报数据库”来得准确，但是“知识数据库”的说法已经比较惯用了，这里便仍延用。</p>
-<p>比如，张三告诉李四：“今天下午两点有个讲座，在百年讲堂。”</p>
+              <div class="post-content" id="post-content"><blockquote>
+<p>3，尝试建立一种自然语言与知识数据库操作之间的转换方法。分两部分。一是知识数据库的构建。这里的知识数据库是临时造的概念，更准确地说是“情报数据库”，记录情报的来源、检测程度、信任程度，以及真值内容等。这里的真值内容其实需要上面的工作2来支持。通过带走信任程度的情报数据库，我的期望是能够进行一定程度的推理或演绎。二和语用有较大关系，是从自然语言（对话为主）中提取出关于所表述信息的可靠程度方面的信息，或者是对信息的更新等，转化成一种知识数据库的操作（添加、更改、删除等），从而实现让机器从文本中学习情报的能力。但是这项工作需要的前置工作非常多，比如词切分、语用的模型等等，还有许多问题要处理。</p>
+</blockquote>
+<p>这里说的“知识数据库”并不限于正确的、符合经验的知识，也包括个体平时接触到的任何可能获取的信息。说是“知识数据库”，其实不如称“情报数据库”来得准确，但是“知识数据库”的说法已经比较惯用了，这里便仍延用。</p>
+<h3 id="一、一个直观的例子"><a href="#一、一个直观的例子" class="headerlink" title="一、一个直观的例子"></a>一、一个直观的例子</h3><p>比如，张三告诉李四：“今天下午两点有个讲座，在百年讲堂。”</p>
 <p>想象一下，李四的大脑里有一个知识数据库。听到张三提供的这个情报，数据库里就添加了一个条目：</p>
 <table>
 <thead>
@@ -143,6 +146,16 @@
 <p>通过推理进行正确性标记。</p>
 <h4 id="情报或知识数据库的意义"><a href="#情报或知识数据库的意义" class="headerlink" title="情报或知识数据库的意义"></a>情报或知识数据库的意义</h4><p>为机器提供推理和决策的能力。</p>
 <h3 id="三、要做哪些工作？"><a href="#三、要做哪些工作？" class="headerlink" title="三、要做哪些工作？"></a>三、要做哪些工作？</h3><h4 id="情报或信息的形式化"><a href="#情报或信息的形式化" class="headerlink" title="情报或信息的形式化"></a>情报或信息的形式化</h4><p>首先要做的是情报（或者说信息）的形式化表示。在一系列工作中，这是非常基础的。</p>
+<h4 id="数据库结构及具体操作的设计"><a href="#数据库结构及具体操作的设计" class="headerlink" title="数据库结构及具体操作的设计"></a>数据库结构及具体操作的设计</h4><p>知识/情报数据库应该能够执行操作？</p>
+<p>除了前面说的增删改查，还有以下例子：</p>
+<ul>
+<li>向父类添加子类（或实例），使得查询父类时能够联想到子类，但查询子类时默认不会联想到这个父类。</li>
+<li>向子类（或实例）添加父类，使得查询子类时能够联想到父类，但查询父类时默认不会联想到这个子类。</li>
+<li>对父类和子类（或实例）进行双向绑定，使得查询其一时能够联想到对方。</li>
+</ul>
+<p>在上面的例子中，我们引入了一些新的条目类型，那就是类和实例，这是面向对象编程中常见的术语。</p>
+<p>我们还可以增加“范例”的条目类型，比如“林冲”是“梁山好汉”的范例。至于范例和实例的区别是什么？主要在于其存在于数据库中的生命周期不一样。实例在使用后可能会比较及时地被销毁，而范例则可能长久存储在数据库中备用。</p>
+<p>上一段话中提到了条目在数据库中的生命周期，这也是此数据库结构设计要考虑的因素。心理学将人的记忆分为感觉记忆、短时记忆（包括工作记忆）、长时记忆等，参考这种知识，我们可以对知识数据库进行分层设计，也分出临时、短时、长时等层次。这种设计是为了让数据库具有高度可扩展性和实时的吞吐性。</p>
 <h4 id="将自然语言转化为数据库操作"><a href="#将自然语言转化为数据库操作" class="headerlink" title="将自然语言转化为数据库操作"></a>将自然语言转化为数据库操作</h4><p><em>语用</em>角色标注？</p>
 </div>
                 <div class="post-meta-footer-wrap"></div>
@@ -183,17 +196,17 @@
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">研究期望</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">基于句法关键词的自然语言义项切分</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">基于感知元的人机通用词典</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/研究期望/文本信息提取（从文本到知识数据库操作）/">文本信息提取（从文本到知识数据库操作）</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/information-database/">文本信息提取（从文本到知识数据库操作）</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/chinese-general-construction-bank/">现代汉语一般构式库</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/semantics-formalization/">☆语义形式化</a></span>
               </nav>
             </div>
 
             <div class="catpostlist-body">
               <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">其他研究</span></div></div>
               <nav class="catpostlist-content">
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/Bachelor-Thesis/">本科毕业论文：痣对大学生面孔知觉内隐态度的影响</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reinforce-learning-for-creature-behavior-simulation/">基于强化学习的生物行为模拟</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/reading-strategy-and-eye-movement/">阅读策略对两种阅读理解任务眼动特征的影响</a></span>
               </nav>
             </div>
@@ -203,16 +216,23 @@
               <nav class="catpostlist-content">
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/classification-of-the-problems-that-humans-are-solving/">人类解决着的问题的基本类型</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/differences-between-yoracaga-and-general-semantics/">唯识学体系和一般语义体系的区别</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/tri-dict/">基于感知元的人机通用词典</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/meaning-item-segmentation/">基于句法关键词的自然语言义项切分</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/oop-nlp/">将oop思想引入语法研究</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/小议计算机语言与自然语言的可比性/">小议计算机语言与自然语言的可比性</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/comparability-between-nl-and-cl/">小议计算机语言与自然语言的可比性</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/differences-in-the-paradigms-of-psychology-and-linguistics/">心理学和语言学的范式差异</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/robot-emotion/">怎样让机器人有情感</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/在新的概念框架下对“知识”进行定义/">在新的概念框架下对“知识”进行定义</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/generation-of-stream-of-consciousness/">意识流生成</a></span>
-                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/knowledge-stack-and-expression/">知识、知识栈、知识表述</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/零星想法/让机器像人一样进行基于语义的学习/">让机器像人一样进行基于语义的学习</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/designing-a-language/">设计论的语言学</a></span>
+              </nav>
+            </div>
+
+            <div class="catpostlist-body">
+              <div class="catpostlist-meta"><div class="catpostlist-title-wrap"><span class="catpostlist-title">杂谈</span></div></div>
+              <nav class="catpostlist-content">
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/robot-emotion/">怎样让机器人有情感</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/to-define-knowledge/">在新的概念框架下对“知识”进行定义</a></span>
                 <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/my-psychology-framework/">我的心理学框架</a></span>
+                <span class="catpostlist-item"><a class="catpostlist-item-link" href="/posts/knowledge-stack-and-expression/">知识、知识栈、知识表述</a></span>
               </nav>
             </div>
 
